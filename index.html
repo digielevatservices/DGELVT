@@ -266,3 +266,67 @@
 
 </body>
 </html>
+<section class="services-container">
+    <h2 class="section-title">Service Parameters</h2>
+    
+    <div class="service-grid">
+        <div class="service-card">
+            <div class="card-head">01 / Infrastructure</div>
+            <h3>Deployment & Hosting</h3>
+            <p>Full deployment on premium servers with 1-year SSL certification and domain management.</p>
+            <div class="price">₹5,000 <small>/ Year</small></div>
+        </div>
+
+        <div class="service-card">
+            <div class="card-head">02 / Performance</div>
+            <h3>System Maintenance</h3>
+            <p>Monthly security patches, speed optimization, and content updates to ensure 99.9% uptime.</p>
+            <div class="price">₹3,000 <small>/ Year</small></div>
+        </div>
+
+        <div class="service-card">
+            <div class="card-head">03 / Engineering</div>
+            <h3>Custom Development</h3>
+            <p>Fully bespoke design tailored to your industry. No generic templates—pure technical branding.</p>
+            <div class="price">Project Based</div>
+        </div>
+    </div>
+
+    <div class="terms-brief">
+        <p><strong>Note:</strong> Yearly fees are billed annually. Customization parameters are defined during the initial blueprint phase. All assets are engineered for high-conversion performance.</p>
+    </div>
+</section>
+
+<style>
+.services-container {
+    max-width: 1200px;
+    margin: 100px auto;
+    padding: 0 40px;
+}
+.section-title {
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    font-size: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 20px;
+}
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+.service-card {
+    background: #080808;
+    border: 1px solid #1a1a1a;
+    padding: 30px;
+    transition: border-color 0.3s;
+}
+.service-card:hover { border-color: var(--accent); }
+.card-head { font-family: 'JetBrains Mono'; color: var(--accent); font-size: 12px; margin-bottom: 20px; }
+.service-card h3 { text-transform: uppercase; margin: 0 0 15px; }
+.service-card p { color: #666; font-size: 14px; line-height: 1.6; }
+.price { margin-top: 25px; font-size: 24px; font-weight: 700; color: #fff; }
+.price small { font-size: 12px; color: #444; }
+.terms-brief { margin-top: 50px; font-size: 13px; color: #444; border-top: 1px solid #1a1a1a; padding-top: 20px; }
+</style>
