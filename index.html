@@ -7,66 +7,70 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #050505;
-            --surface: #0d0d0d;
-            --border: #222222;
+            --bg: #030303;
             --accent: #ff4d00;
-            --text: #ffffff;
-            --text-dim: #888;
+            --border: #1a1a1a;
+            --text-dim: #777;
         }
 
         body {
             margin: 0; padding: 0;
             background-color: var(--bg);
-            /* Brighter, sharper grid for better visibility */
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            color: var(--text);
+            color: #fff;
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* FIXED BLUEPRINT GRID */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(rgba(255, 77, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 77, 0, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
         }
 
         header {
-            padding: 100px 20px 60px;
+            padding: 120px 40px 80px;
             max-width: 1200px;
             margin: auto;
             border-bottom: 1px solid var(--border);
+            background: rgba(3,3,3,0.7);
+            backdrop-filter: blur(12px);
         }
 
         .tag-line {
             font-family: 'JetBrains Mono', monospace;
             color: var(--accent);
             font-size: 12px;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-transform: uppercase;
         }
 
         header h1 {
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-size: clamp(3rem, 10vw, 6rem);
             font-weight: 900;
-            line-height: 0.9;
             margin: 20px 0;
+            line-height: 0.85;
+            letter-spacing: -4px;
             text-transform: uppercase;
-            letter-spacing: -2px;
         }
 
-        .header-info {
-            font-size: 1rem;
-            color: var(--text-dim);
-            max-width: 600px;
-        }
-
+        /* PROJECT GRID */
         .container {
             max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 80px auto;
+            padding: 0 40px;
         }
 
         .portfolio-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 60px;
         }
 
         .project-card {
@@ -78,29 +82,29 @@
         .frame {
             background: #000;
             border: 1px solid var(--border);
-            border-top: 3px solid var(--border);
-            border-radius: 6px;
+            border-top: 4px solid var(--border);
+            border-radius: 4px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: all 0.4s ease;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .frame-header {
-            height: 30px;
-            background: #111;
+            height: 32px;
+            background: #0f0f0f;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 12px;
+            padding: 0 15px;
             border-bottom: 1px solid var(--border);
         }
 
-        .dot-group { display: flex; gap: 5px; }
-        .dot { width: 5px; height: 5px; border-radius: 50%; background: #333; }
+        .dot-group { display: flex; gap: 6px; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #222; }
 
         .img-box {
-            height: 300px;
+            height: 380px;
             overflow: hidden;
             background: #000;
         }
@@ -109,113 +113,114 @@
             width: 100%; height: 100%;
             object-fit: cover;
             object-position: top;
-            opacity: 0.85; /* Brighter by default for mobile */
-            transition: 0.5s ease;
+            opacity: 0.6;
+            filter: grayscale(100%);
+            transition: 0.6s all cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Hover & Mobile Clarity */
+        /* HOVER STATES */
         .project-card:hover .frame {
             border-color: var(--accent);
             border-top-color: var(--accent);
-            box-shadow: 0 0 20px rgba(255, 77, 0, 0.15);
+            transform: translateY(-15px);
+            box-shadow: 0 40px 80px -20px rgba(255, 77, 0, 0.3);
         }
 
         .project-card:hover img {
             opacity: 1;
-            transform: scale(1.02);
+            filter: grayscale(0%);
+            transform: scale(1.05);
         }
 
-        .info { margin-top: 20px; }
-        .info h3 { font-size: 20px; margin: 0; text-transform: uppercase; font-weight: 700; }
+        /* RESTORED TYPOGRAPHY STYLE */
+        .info {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info h3 {
+            font-size: 28px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: -1px;
+            transition: color 0.3s ease;
+        }
+
+        .project-card:hover h3 {
+            color: var(--accent);
+        }
         
         .description {
             color: var(--text-dim);
-            font-size: 14px;
-            margin-top: 8px;
-            line-height: 1.5;
-            padding-left: 12px;
-            border-left: 2px solid var(--border);
+            font-size: 15px;
+            margin-top: 12px;
+            padding-left: 18px;
+            border-left: 2px solid #222;
+            line-height: 1.6;
+            transition: all 0.3s ease;
         }
 
-        /* MOBILE OPTIMIZATION */
-        @media (max-width: 768px) {
-            .portfolio-grid { grid-template-columns: 1fr; }
-            .img-box img { opacity: 1; } /* Always bright on mobile */
-            .frame { border-color: #333; } /* Slightly brighter borders */
-            .description { color: #aaa; } /* Brighter text on mobile */
-            .service-grid { grid-template-columns: 1fr; }
+        .project-card:hover .description {
+            border-left-color: var(--accent);
+            color: #ccc;
         }
 
-        /* SERVICES SECTION */
+        /* PARAMETERS SECTION */
         .services-container {
             max-width: 1200px;
-            margin: 60px auto 100px;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            font-size: 28px;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 15px;
+            margin: 100px auto;
+            padding: 0 40px;
         }
 
         .service-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .service-card {
-            background: #0a0a0a;
-            border: 1px solid var(--border);
-            padding: 20px;
-            border-radius: 4px;
-        }
-
-        .card-head {
-            font-family: 'JetBrains Mono';
-            color: var(--accent);
-            font-size: 10px;
-            margin-bottom: 10px;
-        }
-
-        .service-card h3 {
-            font-size: 16px;
-            text-transform: uppercase;
-            margin: 0 0 12px;
-        }
-
-        .param-list { list-style: none; padding: 0; margin: 0; }
-        .param-list li {
-            font-size: 13px;
-            color: #999;
-            margin-bottom: 6px;
-        }
-        .param-list li::before { content: "• "; color: var(--accent); }
-
-        .terms-footer {
-            margin-top: 30px;
-            padding: 20px;
-            background: #0a0a0a;
-            border: 1px solid var(--border);
-            display: flex;
-            flex-wrap: wrap;
             gap: 20px;
         }
 
-        .term-item { font-size: 12px; color: #777; line-height: 1.5; flex: 1; min-width: 250px; }
+        .service-card {
+            background: rgba(8, 8, 8, 0.9);
+            border: 1px solid var(--border);
+            padding: 30px;
+            backdrop-filter: blur(8px);
+            transition: border-color 0.3s;
+        }
+
+        .service-card:hover { border-color: var(--accent); }
+
+        .service-card h3 { 
+            font-size: 18px; 
+            text-transform: uppercase; 
+            color: var(--accent); 
+            margin: 0 0 20px; 
+            font-family: 'JetBrains Mono';
+        }
+        
+        .param-list { list-style: none; padding: 0; margin: 0; }
+        .param-list li { font-size: 13px; color: #888; margin-bottom: 10px; }
+        .param-list li::before { content: "» "; color: var(--accent); }
+
+        /* MOBILE FIXES */
+        @media (max-width: 900px) {
+            .portfolio-grid, .service-grid { grid-template-columns: 1fr; }
+            .img-box img { opacity: 1; filter: grayscale(0%); }
+            .frame { border-color: var(--accent); }
+            header { padding: 80px 20px 40px; }
+            .info h3 { font-size: 24px; }
+        }
     </style>
 </head>
 <body>
 
+    <div class="grid-bg"></div>
+
     <header>
         <span class="tag-line">Digielevat Deployment Log</span>
         <h1>Project<br>Deployment</h1>
-        <p class="header-info">
-            Commercial-grade digital engineering. Scaling business visibility through technical precision.
+        <p style="color: #666; max-width: 500px; margin-top: 20px;">
+            Commercial-grade digital engineering for high-conversion performance.
         </p>
     </header>
 
@@ -226,15 +231,13 @@
                 <div class="frame">
                     <div class="frame-header">
                         <div class="dot-group"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">ID: 01</span>
+                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">SYS_REF: 01</span>
                     </div>
-                    <div class="img-box">
-                        <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(634).png?raw=true" alt="Digifalcon">
-                    </div>
+                    <div class="img-box"><img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(634).png?raw=true"></div>
                 </div>
                 <div class="info">
                     <h3>Digifalcon</h3>
-                    <p class="description">Aviation authority portal. Engineered for search dominance and lead management.</p>
+                    <p class="description">Leading aviation authority portal. Built for search dominance and optimized lead management.</p>
                 </div>
             </a>
 
@@ -242,15 +245,13 @@
                 <div class="frame">
                     <div class="frame-header">
                         <div class="dot-group"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">ID: 02</span>
+                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">SYS_REF: 02</span>
                     </div>
-                    <div class="img-box">
-                        <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(638).png?raw=true" alt="Sky Light House">
-                    </div>
+                    <div class="img-box"><img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(638).png?raw=true"></div>
                 </div>
                 <div class="info">
                     <h3>Sky Light House</h3>
-                    <p class="description">Luxury retail showcase. Precision-built catalog optimized for visual engagement.</p>
+                    <p class="description">Luxury retail experience. Precision catalog architecture for premium lighting assets.</p>
                 </div>
             </a>
 
@@ -258,15 +259,13 @@
                 <div class="frame">
                     <div class="frame-header">
                         <div class="dot-group"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">ID: 03</span>
+                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">SYS_REF: 03</span>
                     </div>
-                    <div class="img-box">
-                        <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(640).png?raw=true" alt="Medpath">
-                    </div>
+                    <div class="img-box"><img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(640).png?raw=true"></div>
                 </div>
                 <div class="info">
                     <h3>Medpath Global</h3>
-                    <p class="description">Corporate logistics interface. Designed for global trust and professional clarity.</p>
+                    <p class="description">Corporate logistics interface. Designed for global trust, clarity, and secure performance.</p>
                 </div>
             </a>
 
@@ -274,15 +273,13 @@
                 <div class="frame">
                     <div class="frame-header">
                         <div class="dot-group"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">ID: 04</span>
+                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">SYS_REF: 04</span>
                     </div>
-                    <div class="img-box">
-                        <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(639).png?raw=true" alt="Digielevat">
-                    </div>
+                    <div class="img-box"><img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(639).png?raw=true"></div>
                 </div>
                 <div class="info">
                     <h3>Digielevat HQ</h3>
-                    <p class="description">The flagship operational hub. Integrating strategy with modern web standards.</p>
+                    <p class="description">Flagship operational hub. Integrating business strategy with modern web standards.</p>
                 </div>
             </a>
 
@@ -290,49 +287,33 @@
     </div>
 
     <section class="services-container">
-        <h2 class="section-title">Parameters</h2>
-        
         <div class="service-grid">
             <div class="service-card">
-                <div class="card-head">INFRASTRUCTURE</div>
-                <h3>Package 01</h3>
+                <h3>Infrastructure</h3>
                 <ul class="param-list">
-                    <li>1 Year Hosting Included</li>
+                    <li>1 Year Professional Hosting</li>
                     <li>SSL Secure Certification</li>
-                    <li>Business Email Integration</li>
+                    <li>Professional Business Email</li>
                     <li>Annual Renewal: ₹699</li>
                 </ul>
             </div>
-
             <div class="service-card">
-                <div class="card-head">ENGINEERING</div>
-                <h3>Package 02</h3>
+                <h3>Engineering</h3>
                 <ul class="param-list">
-                    <li>WordPress Architecture</li>
-                    <li>Full Mobile Responsiveness</li>
-                    <li>Google Console Setup</li>
-                    <li>WhatsApp/Call Integration</li>
+                    <li>Dynamic WordPress Build</li>
+                    <li>100% Responsive Architecture</li>
+                    <li>Search Console & SEO Ready</li>
+                    <li>Lead Gen Integration</li>
                 </ul>
             </div>
-
             <div class="service-card">
-                <div class="card-head">SUPPORT</div>
-                <h3>Package 03</h3>
+                <h3>Parameters</h3>
                 <ul class="param-list">
-                    <li>12 Mo Technical Maintenance</li>
-                    <li>6 Mo Update Support</li>
-                    <li>8-Day Deployment Cycle</li>
-                    <li>Post-Launch QA Fixes</li>
+                    <li>40% Project Initiation</li>
+                    <li>60% Post-QA Deployment</li>
+                    <li>8-Day Rapid Build Cycle</li>
+                    <li>12 Month Tech Support</li>
                 </ul>
-            </div>
-        </div>
-
-        <div class="terms-footer">
-            <div class="term-item">
-                <strong>Project Initiation:</strong> 40% advance to begin engineering. 60% due upon completion prior to launch.
-            </div>
-            <div class="term-item">
-                <strong>Objective:</strong> High-performance assets engineered to enhance brand credibility and lead generation.
             </div>
         </div>
     </section>
