@@ -3,81 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Development Portfolio | Digielevat</title>
+    <title>Digielevat | Premium Portfolio</title>
     <style>
-        :root { --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --accent: #2563eb; }
-        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.5; }
-        .header { text-align: center; padding: 60px 20px; background: white; border-bottom: 1px solid #e2e8f0; margin: -20px -20px 40px -20px; }
-        .header h1 { font-size: 2.5rem; margin-bottom: 10px; letter-spacing: -1px; color: #1e293b; }
-        .container { max-width: 1100px; margin: auto; }
-        .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
-        .card { background: var(--card); border-radius: 24px; overflow: hidden; border: 1px solid #e2e8f0; transition: all 0.3s ease; text-decoration: none; color: inherit; display: flex; flex-direction: column; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border-color: var(--accent); }
-        .img-container { width: 100%; height: 220px; background: #f1f5f9; overflow: hidden; border-bottom: 1px solid #e2e8f0; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
-        .content { padding: 25px; }
-        .tag { font-size: 11px; background: #eff6ff; color: var(--accent); padding: 5px 12px; border-radius: 100px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-        h3 { margin: 15px 0 8px 0; font-size: 22px; font-weight: 800; }
-        p { color: #64748b; font-size: 15px; margin-bottom: 20px; }
-        .tech-stack { font-size: 12px; font-weight: 600; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 15px; }
+        :root {
+            --primary: #3b82f6;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top left, #0f172a, #020617);
+            color: #ffffff;
+            font-family: 'Inter', system-ui, sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background Mesh */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 0;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            overflow: hidden;
+            text-decoration: none;
+            color: white;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .img-box {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            background: #1e293b;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .card:hover .img-box img {
+            transform: scale(1.1);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .tag {
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        h3 {
+            font-size: 28px;
+            margin: 0 0 15px 0;
+            font-weight: 700;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .badge-list {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 12px;
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 100px;
+            border: 1px solid var(--border);
+        }
+
+        @media (max-width: 600px) {
+            .bento-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
+
     <div class="header">
-        <h1>Project Portfolio</h1>
-        <p>Premium Web Solutions by <strong>Digielevat</strong></p>
+        <h1>Selected Projects</h1>
+        <p style="color: #64748b; font-size: 1.2rem;">Crafting Digital Excellence @ Digielevat</p>
     </div>
 
     <div class="container">
         <div class="bento-grid">
-            <a href="https://digifalcon.in" class="card" target="_blank">
-                <div class="img-container">
+            
+            <a href="https://digifalcon.in" class="card">
+                <div class="img-box">
                     <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(634).png?raw=true" alt="Digifalcon">
                 </div>
                 <div class="content">
-                    <span class="tag">Aviation & SEO</span>
+                    <span class="tag">Aviation / SEO</span>
                     <h3>Digifalcon.in</h3>
-                    <p>High-traffic aviation portal optimized for programmatic SEO. Rankings achieved for competitive pilot training keywords.</p>
-                    <div class="tech-stack">WordPress • SEO Strategy • Performance Optimization</div>
+                    <p>Dominating aviation search rankings with programmatic SEO and high-performance blog architecture.</p>
+                    <div class="badge-list">
+                        <span class="badge">SEO Strategy</span>
+                        <span class="badge">Content Hub</span>
+                    </div>
                 </div>
             </a>
 
-            <a href="https://skylighthouse.co.in" class="card" target="_blank">
-                <div class="img-container">
-                    <img src="https://via.placeholder.com/400x250?text=Sky+Light+House" alt="Sky Light House">
+            <a href="https://skylighthouse.co.in" class="card">
+                <div class="img-box">
+                    <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(638).png?raw=true" alt="Sky Light House">
                 </div>
                 <div class="content">
                     <span class="tag">Luxury Retail</span>
                     <h3>Sky Light House</h3>
-                    <p>Luxury lighting catalog with custom CSS and high-end visual hierarchy. Built for premium consumer engagement.</p>
-                    <div class="tech-stack">Custom CSS • Visual Branding • E-commerce Ready</div>
+                    <p>A visually immersive catalog for luxury lighting. Focus on high-end typography and smooth product display.</p>
+                    <div class="badge-list">
+                        <span class="badge">UI/UX Design</span>
+                        <span class="badge">Visual Catalog</span>
+                    </div>
                 </div>
             </a>
 
-            <a href="https://medpathglobal.in" class="card" target="_blank">
-                <div class="img-container">
-                    <img src="https://via.placeholder.com/400x250?text=Medpath+Global" alt="Medpath Global">
+            <a href="https://medpathglobal.in" class="card">
+                <div class="img-box">
+                    <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(640).png?raw=true" alt="Medpath Global">
                 </div>
                 <div class="content">
-                    <span class="tag">Corporate Services</span>
+                    <span class="tag">Corporate / Medical</span>
                     <h3>Medpath Global</h3>
-                    <p>Professional medical logistics interface focused on global trust and clean corporate UI standards.</p>
-                    <div class="tech-stack">Corporate UI • Logistics Portal • Secure Hosting</div>
+                    <p>Clean, authoritative corporate identity for global medical logistics. Built for trust and professional clarity.</p>
+                    <div class="badge-list">
+                        <span class="badge">Corporate UI</span>
+                        <span class="badge">Logistics</span>
+                    </div>
                 </div>
             </a>
 
-            <a href="https://digielevat.com" class="card" target="_blank">
-                <div class="img-container">
-                    <img src="https://via.placeholder.com/400x250?text=Digielevat" alt="Digielevat">
+            <a href="https://digielevat.com" class="card">
+                <div class="img-box">
+                    <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(639).png?raw=true" alt="Digielevat">
                 </div>
                 <div class="content">
                     <span class="tag">Digital Agency</span>
                     <h3>Digielevat.com</h3>
-                    <p>Flagship agency platform built for lead generation, showcasing strategy and digital transformation.</p>
-                    <div class="tech-stack">Strategy • Lead Gen • Agency Site</div>
+                    <p>The flagship agency portal designed to showcase digital transformation and lead generation strategies.</p>
+                    <div class="badge-list">
+                        <span class="badge">Lead Gen</span>
+                        <span class="badge">Branding</span>
+                    </div>
                 </div>
             </a>
+
         </div>
     </div>
+
 </body>
 </html>
