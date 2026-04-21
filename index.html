@@ -21,7 +21,7 @@
             overflow-x: hidden;
         }
 
-        /* FIXED BLUEPRINT GRID */
+        /* FIXED BLUEPRINT GRID - Perfectly aligned background */
         .grid-bg {
             position: fixed;
             top: 0; left: 0;
@@ -81,12 +81,12 @@
 
         .frame {
             background: #000;
-            border: 1px solid var(--border);
+            border: 1px solid rgba(255, 77, 0, 0.2); /* Faint orange border always visible */
             border-top: 4px solid var(--border);
             border-radius: 4px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -113,8 +113,8 @@
             width: 100%; height: 100%;
             object-fit: cover;
             object-position: top;
-            opacity: 0.6;
-            filter: grayscale(100%);
+            opacity: 0.9; /* Images are visible on desktop */
+            filter: grayscale(0%); /* No more black and white */
             transition: 0.6s all cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -122,17 +122,16 @@
         .project-card:hover .frame {
             border-color: var(--accent);
             border-top-color: var(--accent);
-            transform: translateY(-15px);
+            transform: translateY(-10px);
             box-shadow: 0 40px 80px -20px rgba(255, 77, 0, 0.3);
         }
 
         .project-card:hover img {
             opacity: 1;
-            filter: grayscale(0%);
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
-        /* RESTORED TYPOGRAPHY STYLE */
+        /* RESTORED AUTHORITATIVE TYPOGRAPHY */
         .info {
             margin-top: 30px;
             display: flex;
@@ -145,6 +144,7 @@
             text-transform: uppercase;
             margin: 0;
             letter-spacing: -1px;
+            color: #fff;
             transition: color 0.3s ease;
         }
 
@@ -205,7 +205,7 @@
         /* MOBILE FIXES */
         @media (max-width: 900px) {
             .portfolio-grid, .service-grid { grid-template-columns: 1fr; }
-            .img-box img { opacity: 1; filter: grayscale(0%); }
+            .img-box img { opacity: 1; }
             .frame { border-color: var(--accent); }
             header { padding: 80px 20px 40px; }
             .info h3 { font-size: 24px; }
@@ -217,10 +217,10 @@
     <div class="grid-bg"></div>
 
     <header>
-        <span class="tag-line">Digielevat Deployment Log</span>
+        <span class="tag-line">Digielevat Digital Systems</span>
         <h1>Project<br>Deployment</h1>
         <p style="color: #666; max-width: 500px; margin-top: 20px;">
-            Commercial-grade digital engineering for high-conversion performance.
+            Authoritative web engineering for aviation, retail, and corporate sectors. Precision-built digital infrastructure.
         </p>
     </header>
 
