@@ -1,216 +1,206 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digielevat | Technical Systems</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0a0a0a;
-            --surface: #111111;
-            --border: #222222;
-            --accent: #ff4d00; /* Engineering Orange */
-            --text-dim: #666666;
-        }
+<style>
+    /* Technical Accent & Depth */
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px;
+        padding-top: 40px;
+    }
 
-        body {
-            margin: 0; padding: 0;
-            background-color: var(--bg);
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-        }
+    .project-card {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        background: rgba(255, 255, 255, 0.01);
+        border: 1px solid #1a1a1a;
+        padding: 20px;
+        transition: all 0.4s ease;
+    }
 
-        header {
-            padding: 120px 40px 60px;
-            max-width: 1200px;
-            margin: auto;
-        }
+    /* The "Steel Border" Frame */
+    .browser-frame {
+        background: #000;
+        border: 2px solid #222; /* Thicker, more authoritative border */
+        border-radius: 4px; /* Sharper corners for a technical look */
+        overflow: hidden;
+        position: relative;
+        box-shadow: inset 0 0 20px rgba(0,0,0,1);
+    }
 
-        header h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 900;
-            line-height: 0.85;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: -4px;
-        }
+    .frame-top {
+        height: 28px;
+        background: #1a1a1a;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        border-bottom: 1px solid #262626;
+        justify-content: space-between;
+    }
 
-        /* The Showcase Section */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto 100px;
-            padding: 0 40px;
-        }
+    .dots-group { display: flex; gap: 5px; }
+    .dot { width: 5px; height: 5px; border-radius: 50%; background: #333; }
+    
+    .status-code { 
+        font-family: 'JetBrains Mono', monospace; 
+        font-size: 10px; 
+        color: #444; 
+    }
 
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-        }
+    .img-container {
+        height: 380px;
+        overflow: hidden;
+        filter: saturate(0.8) brightness(0.8);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-        .project-card {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            position: relative;
-        }
+    /* High-Impact Hover */
+    .project-card:hover {
+        background: rgba(255, 77, 0, 0.02);
+        border-color: var(--accent);
+    }
 
-        /* Precision Frame with Hover Glow */
-        .browser-frame {
-            background: #000;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-            position: relative;
-        }
+    .project-card:hover .img-container {
+        filter: saturate(1.1) brightness(1);
+        transform: scale(1.02);
+    }
 
-        .frame-top {
-            height: 34px;
-            background: #181818;
-            display: flex;
-            align-items: center;
-            padding: 0 15px;
-            border-bottom: 1px solid var(--border);
-        }
+    .project-card:hover .browser-frame {
+        border-color: var(--accent);
+        box-shadow: 0 0 30px rgba(255, 77, 0, 0.1);
+    }
 
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: #333; margin-right: 6px; }
+    /* Refined Description Area */
+    .info {
+        margin-top: 20px;
+        padding: 0 5px;
+    }
 
-        .img-container {
-            height: 350px;
-            overflow: hidden;
-            background: #000;
-            opacity: 0.7; /* Dim by default */
-            transition: opacity 0.5s ease;
-        }
+    .info h3 {
+        font-size: 22px;
+        letter-spacing: -1px;
+        margin: 0;
+        text-transform: uppercase;
+    }
 
-        .img-container img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: top;
-            filter: grayscale(30%);
-            transition: all 0.8s ease;
-        }
+    .description {
+        color: #888;
+        font-size: 14px;
+        margin-top: 10px;
+        line-height: 1.5;
+        border-left: 1px solid #333;
+        padding-left: 15px;
+    }
 
-        /* Hover Interactions */
-        .project-card:hover .browser-frame {
-            border-color: var(--accent);
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px -15px rgba(255, 77, 0, 0.2);
-        }
+    .project-card:hover .description {
+        border-left-color: var(--accent);
+        color: #ccc;
+    }
 
-        .project-card:hover .img-container {
-            opacity: 1; /* Powers on */
-        }
+    .tag-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
 
-        .project-card:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.05);
-        }
+    .tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        padding: 2px 8px;
+        background: #111;
+        border: 1px solid #222;
+        color: #555;
+    }
+</style>
 
-        .info {
-            margin-top: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .info h3 {
-            font-size: 20px;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin: 0;
-            letter-spacing: -0.5px;
-        }
-
-        .tech-id {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--text-dim);
-            border: 1px solid var(--border);
-            padding: 2px 8px;
-        }
-
-        .project-card:hover .tech-id {
-            color: var(--accent);
-            border-color: var(--accent);
-        }
-
-        @media (max-width: 900px) {
-            .portfolio-grid { grid-template-columns: 1fr; }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <p style="font-family: 'JetBrains Mono'; color: var(--accent); letter-spacing: 4px; font-size: 12px;">SYSTEMS.DEPLOYMENT.LOG</p>
-        <h1>Project<br>Deployment</h1>
-        <p style="color: var(--text-dim); max-width: 500px; margin-top: 20px;">Verification of digital infrastructure across aviation, logistics, and retail assets.</p>
-    </header>
-
-    <div class="container">
-        <div class="portfolio-grid">
-            
-            <a href="https://digifalcon.in" class="project-card">
-                <div class="browser-frame">
-                    <div class="frame-top"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                    <div class="img-container">
-                        <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(634).png?raw=true" alt="Digifalcon">
-                    </div>
+<div class="container">
+    <div class="portfolio-grid">
+        
+        <a href="#" class="project-card">
+            <div class="browser-frame">
+                <div class="frame-top">
+                    <div class="dots-group"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                    <span class="status-code">TYPE: HOSPITALITY_CORE</span>
                 </div>
-                <div class="info">
-                    <h3>Digifalcon</h3>
-                    <span class="tech-id">AV-LOG-01</span>
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1000" alt="Restaurant Concept">
                 </div>
-            </a>
+            </div>
+            <div class="info">
+                <h3>Gastronomy Digital</h3>
+                <div class="description">
+                    High-conversion interface for premium dining. Engineered for rapid reservations and visual menu storytelling.
+                </div>
+                <div class="tag-row">
+                    <span class="tag">REVENUE-DRIVEN</span>
+                    <span class="tag">HOSPITALITY</span>
+                </div>
+            </div>
+        </a>
 
-            <a href="https://skylighthouse.co.in" class="project-card">
-                <div class="browser-frame">
-                    <div class="frame-top"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                    <div class="img-container">
-                        <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(638).png?raw=true" alt="Sky Light House">
-                    </div>
+        <a href="https://digifalcon.in" class="project-card">
+            <div class="browser-frame">
+                <div class="frame-top">
+                    <div class="dots-group"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                    <span class="status-code">TYPE: ED_TECH_AV</span>
                 </div>
-                <div class="info">
-                    <h3>Sky Light House</h3>
-                    <span class="tech-id">RT-LOG-02</span>
+                <div class="img-container">
+                    <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(634).png?raw=true" alt="Digifalcon">
                 </div>
-            </a>
+            </div>
+            <div class="info">
+                <h3>Digifalcon</h3>
+                <div class="description">
+                    Complex SEO architecture for aviation training. Dominating search rankings through technical content authority.
+                </div>
+                <div class="tag-row">
+                    <span class="tag">SEO_SYSTEMS</span>
+                    <span class="tag">AVIATION</span>
+                </div>
+            </div>
+        </a>
 
-            <a href="https://medpathglobal.in" class="project-card">
-                <div class="browser-frame">
-                    <div class="frame-top"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                    <div class="img-container">
-                        <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(640).png?raw=true" alt="Medpath">
-                    </div>
+        <a href="https://skylighthouse.co.in" class="project-card">
+            <div class="browser-frame">
+                <div class="frame-top">
+                    <div class="dots-group"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                    <span class="status-code">TYPE: RETAIL_LUX</span>
                 </div>
-                <div class="info">
-                    <h3>Medpath Global</h3>
-                    <span class="tech-id">MD-LOG-03</span>
+                <div class="img-container">
+                    <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(638).png?raw=true" alt="Sky Light House">
                 </div>
-            </a>
+            </div>
+            <div class="info">
+                <h3>Sky Light House</h3>
+                <div class="description">
+                    Luxury lighting catalog with a focus on visual performance. Precision retail engineering for high-end fixtures.
+                </div>
+                <div class="tag-row">
+                    <span class="tag">E-COMMERCE</span>
+                    <span class="tag">RETAIL</span>
+                </div>
+            </div>
+        </a>
 
-            <a href="https://digielevat.com" class="project-card">
-                <div class="browser-frame">
-                    <div class="frame-top"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                    <div class="img-container">
-                        <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(639).png?raw=true" alt="Digielevat">
-                    </div>
+        <a href="https://digielevat.com" class="project-card">
+            <div class="browser-frame">
+                <div class="frame-top">
+                    <div class="dots-group"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                    <span class="status-code">TYPE: AGENCY_HQ</span>
                 </div>
-                <div class="info">
-                    <h3>Digielevat</h3>
-                    <span class="tech-id">HQ-LOG-04</span>
+                <div class="img-container">
+                    <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(639).png?raw=true" alt="Digielevat">
                 </div>
-            </a>
-
-        </div>
+            </div>
+            <div class="info">
+                <h3>Digielevat HQ</h3>
+                <div class="description">
+                    Our central operational hub. Integrating programmatic lead generation with modern web standards.
+                </div>
+                <div class="tag-row">
+                    <span class="tag">STRATEGY</span>
+                    <span class="tag">LEAD_GEN</span>
+                </div>
+            </div>
+        </a>
     </div>
-
-</body>
-</html>
+</div>
