@@ -7,29 +7,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #030303;
-            --surface: #0a0a0a;
-            --border: #1a1a1a;
+            --bg: #050505;
+            --surface: #0d0d0d;
+            --border: #222222;
             --accent: #ff4d00;
             --text: #ffffff;
-            --text-dim: #666;
+            --text-dim: #888;
         }
 
         body {
             margin: 0; padding: 0;
             background-color: var(--bg);
+            /* Brighter, sharper grid for better visibility */
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
             color: var(--text);
             font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
         }
 
-        /* HEADER SECTION */
         header {
-            padding: 120px 40px 80px;
+            padding: 100px 20px 60px;
             max-width: 1200px;
             margin: auto;
             border-bottom: 1px solid var(--border);
@@ -44,179 +43,170 @@
         }
 
         header h1 {
-            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
             font-weight: 900;
             line-height: 0.9;
             margin: 20px 0;
             text-transform: uppercase;
-            letter-spacing: -3px;
+            letter-spacing: -2px;
         }
 
         .header-info {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--text-dim);
             max-width: 600px;
         }
 
-        /* PROJECT GRID */
         .container {
             max-width: 1200px;
-            margin: 80px auto;
-            padding: 0 40px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
         .portfolio-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 40px;
         }
 
         .project-card {
             text-decoration: none;
             color: inherit;
             display: block;
-            transition: 0.4s;
         }
 
         .frame {
             background: #000;
             border: 1px solid var(--border);
-            border-top: 4px solid var(--border);
-            border-radius: 4px;
+            border-top: 3px solid var(--border);
+            border-radius: 6px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            transition: all 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: all 0.4s ease;
         }
 
         .frame-header {
             height: 30px;
-            background: #0f0f0f;
+            background: #111;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 15px;
+            padding: 0 12px;
             border-bottom: 1px solid var(--border);
         }
 
-        .dot-group { display: flex; gap: 6px; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: #222; }
+        .dot-group { display: flex; gap: 5px; }
+        .dot { width: 5px; height: 5px; border-radius: 50%; background: #333; }
 
         .img-box {
-            height: 350px;
+            height: 300px;
             overflow: hidden;
-            background: #050505;
+            background: #000;
         }
 
         .img-box img {
             width: 100%; height: 100%;
             object-fit: cover;
             object-position: top;
-            opacity: 0.6;
-            filter: grayscale(40%);
-            transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0.85; /* Brighter by default for mobile */
+            transition: 0.5s ease;
         }
 
+        /* Hover & Mobile Clarity */
         .project-card:hover .frame {
             border-color: var(--accent);
             border-top-color: var(--accent);
-            transform: translateY(-10px);
-            box-shadow: 0 40px 80px -20px rgba(255, 77, 0, 0.2);
+            box-shadow: 0 0 20px rgba(255, 77, 0, 0.15);
         }
 
         .project-card:hover img {
             opacity: 1;
-            filter: grayscale(0%);
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
-        .info { margin-top: 25px; }
-        .info h3 { font-size: 24px; margin: 0; text-transform: uppercase; font-weight: 700; }
+        .info { margin-top: 20px; }
+        .info h3 { font-size: 20px; margin: 0; text-transform: uppercase; font-weight: 700; }
         
         .description {
             color: var(--text-dim);
             font-size: 14px;
-            margin-top: 10px;
+            margin-top: 8px;
             line-height: 1.5;
-            padding-left: 15px;
-            border-left: 2px solid #222;
+            padding-left: 12px;
+            border-left: 2px solid var(--border);
         }
 
-        .project-card:hover .description {
-            border-left-color: var(--accent);
-            color: #ccc;
+        /* MOBILE OPTIMIZATION */
+        @media (max-width: 768px) {
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .img-box img { opacity: 1; } /* Always bright on mobile */
+            .frame { border-color: #333; } /* Slightly brighter borders */
+            .description { color: #aaa; } /* Brighter text on mobile */
+            .service-grid { grid-template-columns: 1fr; }
         }
 
-        /* SERVICE PARAMETERS SECTION */
+        /* SERVICES SECTION */
         .services-container {
             max-width: 1200px;
-            margin: 100px auto;
-            padding: 0 40px;
+            margin: 60px auto 100px;
+            padding: 0 20px;
         }
 
         .section-title {
             text-transform: uppercase;
-            letter-spacing: -2px;
-            font-size: 32px;
-            margin-bottom: 40px;
-            border-bottom: 1px solid #1a1a1a;
-            padding-bottom: 20px;
+            letter-spacing: -1px;
+            font-size: 28px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
         }
 
         .service-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 15px;
         }
 
         .service-card {
-            background: #080808;
-            border: 1px solid #1a1a1a;
-            padding: 25px;
-            transition: 0.3s;
+            background: #0a0a0a;
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 4px;
         }
-
-        .service-card:hover { border-color: var(--accent); }
 
         .card-head {
             font-family: 'JetBrains Mono';
             color: var(--accent);
-            font-size: 11px;
-            margin-bottom: 15px;
+            font-size: 10px;
+            margin-bottom: 10px;
         }
 
         .service-card h3 {
-            font-size: 18px;
+            font-size: 16px;
             text-transform: uppercase;
-            margin: 0 0 15px;
-            letter-spacing: 1px;
+            margin: 0 0 12px;
         }
 
         .param-list { list-style: none; padding: 0; margin: 0; }
         .param-list li {
             font-size: 13px;
-            color: #666;
-            margin-bottom: 8px;
-            line-height: 1.4;
+            color: #999;
+            margin-bottom: 6px;
         }
         .param-list li::before { content: "• "; color: var(--accent); }
 
         .terms-footer {
-            margin-top: 40px;
-            padding: 25px;
-            background: #050505;
-            border: 1px solid #111;
+            margin-top: 30px;
+            padding: 20px;
+            background: #0a0a0a;
+            border: 1px solid var(--border);
             display: flex;
-            justify-content: space-between;
-            gap: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .term-item { font-size: 12px; color: #444; line-height: 1.6; max-width: 450px; }
-
-        @media (max-width: 900px) {
-            .portfolio-grid, .service-grid { grid-template-columns: 1fr; }
-            .terms-footer { flex-direction: column; }
-        }
+        .term-item { font-size: 12px; color: #777; line-height: 1.5; flex: 1; min-width: 250px; }
     </style>
 </head>
 <body>
@@ -225,8 +215,7 @@
         <span class="tag-line">Digielevat Deployment Log</span>
         <h1>Project<br>Deployment</h1>
         <p class="header-info">
-            High-performance digital engineering across commercial and retail ecosystems. 
-            Scaling business visibility through technical precision.
+            Commercial-grade digital engineering. Scaling business visibility through technical precision.
         </p>
     </header>
 
@@ -237,7 +226,7 @@
                 <div class="frame">
                     <div class="frame-header">
                         <div class="dot-group"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #333;">ASSET: 01</span>
+                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">ID: 01</span>
                     </div>
                     <div class="img-box">
                         <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(634).png?raw=true" alt="Digifalcon">
@@ -253,7 +242,7 @@
                 <div class="frame">
                     <div class="frame-header">
                         <div class="dot-group"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #333;">ASSET: 02</span>
+                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">ID: 02</span>
                     </div>
                     <div class="img-box">
                         <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(638).png?raw=true" alt="Sky Light House">
@@ -269,7 +258,7 @@
                 <div class="frame">
                     <div class="frame-header">
                         <div class="dot-group"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #333;">ASSET: 03</span>
+                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">ID: 03</span>
                     </div>
                     <div class="img-box">
                         <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(640).png?raw=true" alt="Medpath">
@@ -285,7 +274,7 @@
                 <div class="frame">
                     <div class="frame-header">
                         <div class="dot-group"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #333;">ASSET: 04</span>
+                        <span style="font-family: 'JetBrains Mono'; font-size: 10px; color: #444;">ID: 04</span>
                     </div>
                     <div class="img-box">
                         <img src="https://github.com/digielevatservices/DGELVT/blob/main/Screenshot%20(639).png?raw=true" alt="Digielevat">
@@ -301,49 +290,49 @@
     </div>
 
     <section class="services-container">
-        <h2 class="section-title">Deployment Parameters</h2>
+        <h2 class="section-title">Parameters</h2>
         
         <div class="service-grid">
             <div class="service-card">
-                <div class="card-head">PARAMETER // 01</div>
-                <h3>Infrastructure</h3>
+                <div class="card-head">INFRASTRUCTURE</div>
+                <h3>Package 01</h3>
                 <ul class="param-list">
-                    <li>1 Year Professional Hosting Included</li>
-                    <li>SSL Certification (Secure Site)</li>
-                    <li>Professional Business Email ID</li>
-                    <li>Annual Renewal Fee: ₹699</li>
+                    <li>1 Year Hosting Included</li>
+                    <li>SSL Secure Certification</li>
+                    <li>Business Email Integration</li>
+                    <li>Annual Renewal: ₹699</li>
                 </ul>
             </div>
 
             <div class="service-card">
-                <div class="card-head">PARAMETER // 02</div>
-                <h3>Engineering</h3>
+                <div class="card-head">ENGINEERING</div>
+                <h3>Package 02</h3>
                 <ul class="param-list">
-                    <li>Dynamic WordPress Architecture</li>
-                    <li>100% Mobile & Desktop Responsive</li>
-                    <li>Google Search Console Integration</li>
-                    <li>Integrated Lead Gen (WhatsApp/Call)</li>
+                    <li>WordPress Architecture</li>
+                    <li>Full Mobile Responsiveness</li>
+                    <li>Google Console Setup</li>
+                    <li>WhatsApp/Call Integration</li>
                 </ul>
             </div>
 
             <div class="service-card">
-                <div class="card-head">PARAMETER // 03</div>
-                <h3>Support</h3>
+                <div class="card-head">SUPPORT</div>
+                <h3>Package 03</h3>
                 <ul class="param-list">
-                    <li>12 Months Technical Maintenance</li>
-                    <li>6 Months Update Support</li>
-                    <li>8-Day Rapid Development Cycle</li>
-                    <li>Post-Launch Quality Assurance</li>
+                    <li>12 Mo Technical Maintenance</li>
+                    <li>6 Mo Update Support</li>
+                    <li>8-Day Deployment Cycle</li>
+                    <li>Post-Launch QA Fixes</li>
                 </ul>
             </div>
         </div>
 
         <div class="terms-footer">
             <div class="term-item">
-                <strong>Project Initiation:</strong> 40% advance required to secure order and begin engineering. 60% due upon completion prior to site launch.
+                <strong>Project Initiation:</strong> 40% advance to begin engineering. 60% due upon completion prior to launch.
             </div>
             <div class="term-item">
-                <strong>Objective:</strong> To develop professional, user-friendly digital assets that enhance brand credibility and lead generation.
+                <strong>Objective:</strong> High-performance assets engineered to enhance brand credibility and lead generation.
             </div>
         </div>
     </section>
