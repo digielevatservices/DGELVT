@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Portfolio | Digielevat</title>
+    <style>
+        :root { --bg: #0a0a0a; --card: #161616; --text: #ededed; --accent: #3b82f6; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        header { text-align: center; padding: 50px 0; }
+        .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: auto; }
+        .card { background: var(--card); border-radius: 24px; padding: 30px; border: 1px solid #333; transition: 0.3s; cursor: pointer; text-decoration: none; color: inherit; display: flex; flex-direction: column; justify-content: space-between; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .tag { font-size: 12px; color: var(--accent); font-weight: bold; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        h3 { margin: 10px 0; font-size: 24px; }
+        p { color: #888; font-size: 15px; line-height: 1.5; }
+        .btn { margin-top: 20px; color: var(--accent); font-weight: 600; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Our Web Development Work</h1>
+        <p>High-performance sites built for scale.</p>
+    </header>
+
+    <div class="bento-grid">
+        <a href="https://digifalcon.in" class="card" target="_blank">
+            <div><span class="tag">Aviation & SEO</span><h3>Digifalcon</h3><p>Educational portal with advanced content marketing and search rankings.</p></div>
+            <div class="btn">Live View →</div>
+        </a>
+
+        <a href="https://skylighthouse.co.in" class="card" target="_blank">
+            <div><span class="tag">Luxury Retail</span><h3>Sky Light House</h3><p>Premium product catalog with custom CSS for high-end lighting fixtures.</p></div>
+            <div class="btn">Live View →</div>
+        </a>
+
+        <a href="https://medpathglobal.in" class="card" target="_blank">
+            <div><span class="tag">Professional Services</span><h3>Medpath Global</h3><p>Clean, trust-focused UI for global medical and logistics services.</p></div>
+            <div class="btn">Live View →</div>
+        </a>
+
+        <a href="https://digielevat.com" class="card" target="_blank">
+            <div><span class="tag">Digital Agency</span><h3>Digielevat</h3><p>Our flagship agency site focused on lead generation and strategy.</p></div>
+            <div class="btn">Live View →</div>
+        </a>
+    </div>
+</body>
+</html>
